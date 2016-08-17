@@ -1,5 +1,5 @@
 .bg{
-	background-image: url("assets/images/outsideStation.jpeg") no-repeat center center;
+	
 	position:fixed;
 	width:100%;
 	height:150px; /*same as jumbotron*/
@@ -8,13 +8,27 @@
 	z-index: -1;
 }
 .jumbotron{
+	background-image: url("../images/blueLongtrain.jpeg");
 	margin-bottom: 0px;
 	height:150px;
 	color:red;
 	text-shadow: black 0.2em 0.2em 0.2em;
-	background:transparent;
+
+/*instead of bimg in body - include in jumbotron....
+	background-image: url("assets/images/outsideStation.jpeg") no-repeat center center;
+	background-attachment:fixed;
+	min.height:;
+	margin-top:0px;
+	*/
 
 }
 body{
 	border:black 15px solid;
+	background-image: url("assets/images/blueLogtrain.jpeg") no-repeat center center;
+
+}
+h1{
+	font-size:32px;
+	font:black;
+	
 }
