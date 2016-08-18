@@ -68,8 +68,8 @@
 		// 	name: train,
 		// 	dest: dest,
 		// 	etc
-		// }
-		alert(train + "added to the fleet!");
+		// } and thereafter database.ref().push(newTrain);
+		alert(train + " added to the fleet!");
 		// Change what is saved in firebase
 		database.ref().push({  //database.ref().set({??? difference? set writes over?
 			train: train,
@@ -78,7 +78,7 @@
 			freq:freq
 		});
 
-		$("#nameinput").val("");
+		$("#nameinput").val("");  // clears form fields
 		$("#destinput").val("");
 		$("#firstTinput").val("");
 		$("#freqinput").val("");
@@ -95,58 +95,40 @@
 	// });
 
 //retrieve data from db .on("value",function(snapshot){} anytime something changes
-	database.ref().on("child_added", function(snapshot) {
+	database.ref().on("child_added", function(childSnapshot) {
 
-		console.log(snapshot.val());
+		console.log(childSnapshot.val());
 
-		console.log(snapshot.val().train);
-		console.log(snapshot.val().dest);
-		console.log(snapshot.val().firstT);
-		console.log(snapshot.val().freq);
+		var train = childSnapshot.val().train;
+		var dest = childSnapshot.val().dest;
+		var firstT= childSnapshot.val().firstT;
+		var freq = childSnapshot.val().freq;
+		// var next = 
+		// var minAway = 
 
-		var tr = ("<tr>");
-		var td = ("<td>");
+// moment.unix (seconds since the Unix Epoch
+// moment().toString() // "Sat Apr 30 2016 16:59:46 GMT-0500"
+// moment().toNow(); timeago/relative time moment([2007,0,29]).toNow();
+// var a = moment([2007,0,28]) and var b=moment([2007,0,29])
+		//train info
+		console.log(train);
+		console.log(dest);
+		console.log(firstT);
+		console.log(freq);
+		// console.log(next);
+		// console.log(minAway);
+
+$("#trainTable > tbody").append("<tr><td>"+ train + "</td><td>" + dest + "</td><td>" + freq + "</td><td>" + next + "</td><td>" + minAway + "</td></tr>");
+
+
 		// var tbody $(<td>).html(variable train)
-
-		$("tbody").append(tr);   /// ? id for tbody
-		$("tr").append(td, train);
-		$("tr").append(td);
-		$("tr").append(td);
-		$("tr").append(td);
-		$("tr").append(td);
-		// Change the HTML // fix table - them $("#name"),$("#dest")etc for each field
-		// maybe .append instd of html
-		//$("#displayedData").append(snapshot.val().name + " | " + snapshot.val().dest + " | " + snapshot.val().firstT) + " | " +(snapshot.val().freq);
-		// Change the HTML to reflect
-	$("#name").append(snapshot.val().train); //into each td of table
-	$("#dest").append(snapshot.val().dest);
-	$("#firstT").append(snapshot.val().firstT);
-	$("#freq").append(snapshot.val().freq);
-	$("#next").append(next);
-	$("#minAway").append(minAway); //will it work with next var calc at top?
-
-	//play audio Train_Honk_Honk
-
-	//$("h1").show("slide", {direction: "right"}, 3000);
-	//$("h1").fadeOut; //want to send right and have it come back from the left to center, 
-
-// alt 2 - var div =$("h1");
-// 			div.animate({width: 500px, opacity '0.4'}, "slow");
-// 			div.animate({width: 170px, opacity '0.9'}, "slow");
-
-// alt 3	var div =$("h1");
-// 			div.animate({height: 300px, opacity '0.4'}, "slow");
-// 			div.animate({width: 300px, opacity '0.8'}, "slow");
-// 			div.animate({height: 100px, opacity '0.4'}, "slow");
-// 			div.animate({width: 100px, opacity '0.8'}, "slow");
-
-
-
-	},
-
-	function(errorObject){
+},	function (errorObject){
 		console.log("The read failed" + errorObject.code);
 
-	});
+	
+});
+// 
+
+	
 
 
