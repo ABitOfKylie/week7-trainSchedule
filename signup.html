@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content = "width = device-width, initial-scale = 1">
+	<title>SignIn</title>
+
+	<!-- Bootstrap CDN-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- Style and js links-->
+	<link type="text/css" rel="stylesheet" href="assets/css/reset.css"/>
+	<link type="text/css" rel="stylesheet" href="assets/css/signStyle.css"/>
+	
+	<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>	
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+</head>
+	<body>  
+		<div class ="wrapper">
+			<div class = "row">
+				<div class="col-md-4">
+			<form class="form-signin"> 
+				<h2 class="formSigninHeading"> Please login </h2>
+				<input type="email" class="formControl" id = "name" name = "username" placeholder="Email Address" required="" autofocus=""/>
+				<input type="password" class="formControl" id = "pass" name = "password" placeholder="Password" required=""/>
+					<!-- <label class="checkbox">
+					<input type="checkbox" value = "remember-me" id="rememberMe" name ="rememberMe">Remember me
+					</label> -->
+					<button class="btn btn-sm btn-primary btn-block" id="login" type="submit">Login</button>
+					<button class="btn btn-sm btn-info btn-block" id="signup" type="submit">SignUp</button>
+					<button id="btnlogout" class = "btn btn-action hide"> Log Out </button>
+			</form>
+		</div>
+		<script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+		<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+		<script src="assets/javascript/signin.js"></script>
+	</body>
+</html>

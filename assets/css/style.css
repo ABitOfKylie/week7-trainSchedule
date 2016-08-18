@@ -6,12 +6,14 @@
 	top:0;
 	left:0;
 	z-index: -1;
+	background-color:lightyellow;
 }
 .jumbotron{
-	background-image: url("../images/blueLongtrain.jpeg");
+	background-image: url("../images/Banner800.gif");
 	margin-bottom: 0px;
 	height:150px;
-	color:red;
+	max-width: 100%
+	
 	text-shadow: black 0.2em 0.2em 0.2em;
 
 /*instead of bimg in body - include in jumbotron....
@@ -21,6 +23,9 @@
 	margin-top:0px;
 	*/
 
+.time{
+
+}
 }
 body{
 	border:black 15px solid;

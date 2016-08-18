@@ -5,49 +5,49 @@
     databaseURL: "https://trainschedule-ae13e.firebaseio.com",
     storageBucket: "trainschedule-ae13e.appspot.com",
   };
-  	firebase.initializeApp(config);		// 
+  	firebase.initializeApp(config);
 
 	var database = firebase.database();   // reference to db service
 
 	// var myFirebaseRef = new firebase("https://trainschedule-ae13e.firebaseio.com/");
 
-// Variables and set initial values
-//-------------------------
-	var train = "";
-	var dest = "";
-	var firstT = "03:30"; //first time train runs
-	var freq = 3; //frequency
-	// First Time (pushed back 1 year to make sure it comes before current time)
-	var firstTConverted = moment(firstT,"hh:mm").subtract(1, "years");
-		console.log(firstTConverted); 
-	// Current Time
-	var currentTime = moment();
-	console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+<!-- **********************Variables ad Initial Values ********************- -->
 
-	// Difference between the times
-	var diffTime = moment().diff(moment(firstTConverted), "minutes");
-	console.log("DIFFERENCE IN TIME: " + diffTime);
+	// //var train = "";
+	// var dest = "";
+	// var firstT = "03:30";//$("#firstTinput").format(""); and $("#firstTinput, hh:mm");doesnt work
+	// var freq =  3 //$("#freqinput"); frequency 3
+	// // First Time (pushed back 1 year to make sure it comes before current time)
+	// var firstTConverted = moment(firstT, "hh:mm").subtract(1, "years");
+	// 	console.log(firstTConverted); 
+	// // testing converted date Michael
 
-	// Time apart (remainder)
-	var tRemainder = diffTime % freq;
-	console.log(tRemainder);
+	// // Current Time
+	// var currentTime = moment();
+	// console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
-	// Minute Until Train
-	var minAway = freq - tRemainder;
-	console.log("MINUTES TILL TRAIN: " + minAway);
+	// // Difference between the times
+	// var diffTime = moment().diff(moment(firstTConverted, "hh:mm"), "minutes");
+	// console.log("DIFFERENCE IN TIME: " + diffTime);
 
-	// Next Train
-	var next = moment().add(minAway, "minutes")
-	console.log("ARRIVAL TIME: " + moment(next).format("hh:mm"))	
+	// // Time apart (remainder)
+	// var tRemainder = diffTime % freq;
+	// console.log(tRemainder);
 
-	$("#time").html("Crazy time: " + firstTConverted);
+	// // Minute Until Train
+	// var minAway = freq - tRemainder;
+	// console.log("MINUTES TILL TRAIN: " + minAway);
 
+	// // Next Train
+	// var next = moment().add(minAway, "minutes").format("hh:mm")
+	// console.log("ARRIVAL TIME: " + moment(next).format("hh:mm"))
 
+	// var Now = moment().toString();
+	// console.log(Now);	
 
-// click function when new train info submitted
-//_________________________________________
+	$(".time").html(moment().toString()); // note:REAL time, not year ago
 
-	$("#time").html("Crazy time: " + currentTime);
+<!-- **********************Add New Train - click ********************- -->
 
 	$("#addTrain").on("click", function(){
 
@@ -62,16 +62,9 @@
 		console.log(firstT);
 		console.log(freq);
 
-		// in ex. they create var train = $("#nameinput").val().trim();
-		// then create a local temp object for holding employee/train data
-		// var newTrain = {
-		// 	name: train,
-		// 	dest: dest,
-		// 	etc
-		// } and thereafter database.ref().push(newTrain);
 		alert(train + " added to the fleet!");
 		// Change what is saved in firebase
-		database.ref().push({  //database.ref().set({??? difference? set writes over?
+		database.ref().push({  //database.ref().set({??? difference? 
 			train: train,
 			dest: dest,
 			firstT: firstT,
@@ -87,14 +80,11 @@
 	});
 
 
-// database.ref().set({}   Store click data to Firebase - Save new value to Firebase
+// database.ref().set({}   Store click data to Firebase - set writes over
 //-------------------------
 
-	// database.ref().set({
-	// 	clickCount: clickCounter
-	// });
-
 //retrieve data from db .on("value",function(snapshot){} anytime something changes
+// but this will add/append new td to tr to body -- new object(?) each click
 	database.ref().on("child_added", function(childSnapshot) {
 
 		console.log(childSnapshot.val());
@@ -103,8 +93,19 @@
 		var dest = childSnapshot.val().dest;
 		var firstT= childSnapshot.val().firstT;
 		var freq = childSnapshot.val().freq;
-		// var next = 
-		// var minAway = 
+
+		var firstTConverted = moment(firstT, "hh:mm").subtract(1, "years");
+			console.log(firstTConverted); 
+		var currentTime = moment();
+			console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+		var diffTime = moment().diff(moment(firstTConverted, "hh:mm"), "minutes");
+			console.log("DIFFERENCE IN TIME: " + diffTime);
+		var tRemainder = diffTime % freq;
+			console.log(tRemainder);
+		var minAway = freq - tRemainder;
+			console.log("MINUTES TILL TRAIN: " + minAway);
+		var next = moment().add(minAway, "minutes").format("hh:mm")
+			console.log("ARRIVAL TIME: " + moment(next).format("hh:mm"))
 
 // moment.unix (seconds since the Unix Epoch
 // moment().toString() // "Sat Apr 30 2016 16:59:46 GMT-0500"
@@ -115,6 +116,8 @@
 		console.log(dest);
 		console.log(firstT);
 		console.log(freq);
+		console.log(minAway);
+		console.log(next);
 		// console.log(next);
 		// console.log(minAway);
 
