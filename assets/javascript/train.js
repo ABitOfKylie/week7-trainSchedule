@@ -12,38 +12,7 @@
 	// var myFirebaseRef = new firebase("https://trainschedule-ae13e.firebaseio.com/");
 
 <!-- **********************Variables ad Initial Values ********************- -->
-
-	// //var train = "";
-	// var dest = "";
-	// var firstT = "03:30";//$("#firstTinput").format(""); and $("#firstTinput, hh:mm");doesnt work
-	// var freq =  3 //$("#freqinput"); frequency 3
-	// // First Time (pushed back 1 year to make sure it comes before current time)
-	// var firstTConverted = moment(firstT, "hh:mm").subtract(1, "years");
-	// 	console.log(firstTConverted); 
-	// // testing converted date Michael
-
-	// // Current Time
-	// var currentTime = moment();
-	// console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
-
-	// // Difference between the times
-	// var diffTime = moment().diff(moment(firstTConverted, "hh:mm"), "minutes");
-	// console.log("DIFFERENCE IN TIME: " + diffTime);
-
-	// // Time apart (remainder)
-	// var tRemainder = diffTime % freq;
-	// console.log(tRemainder);
-
-	// // Minute Until Train
-	// var minAway = freq - tRemainder;
-	// console.log("MINUTES TILL TRAIN: " + minAway);
-
-	// // Next Train
-	// var next = moment().add(minAway, "minutes").format("hh:mm")
-	// console.log("ARRIVAL TIME: " + moment(next).format("hh:mm"))
-
-	// var Now = moment().toString();
-	// console.log(Now);	
+	//var audiohorn(src )
 
 	$(".time").html(moment().toString()); // note:REAL time, not year ago
 
@@ -85,7 +54,7 @@
 
 //retrieve data from db .on("value",function(snapshot){} anytime something changes
 // but this will add/append new td to tr to body -- new object(?) each click
-	database.ref().on("child_added", function(childSnapshot) {
+	var uhoh= database.ref().on("child_added", function(childSnapshot) {
 
 		console.log(childSnapshot.val());
 
@@ -93,6 +62,7 @@
 		var dest = childSnapshot.val().dest;
 		var firstT= childSnapshot.val().firstT;
 		var freq = childSnapshot.val().freq;
+
 
 		var firstTConverted = moment(firstT, "hh:mm").subtract(1, "years");
 			console.log(firstTConverted); 
@@ -118,16 +88,15 @@
 		console.log(freq);
 		console.log(minAway);
 		console.log(next);
-		// console.log(next);
-		// console.log(minAway);
+		
 
 $("#trainTable > tbody").append("<tr><td>"+ train + "</td><td>" + dest + "</td><td>" + freq + "</td><td>" + next + "</td><td>" + minAway + "</td></tr>");
-
-
+//audio play();
+		
 		// var tbody $(<td>).html(variable train)
 },	function (errorObject){
 		console.log("The read failed" + errorObject.code);
-
+		setInterval (uhoh, 60000);
 	
 });
 // 

@@ -35,5 +35,9 @@ body{
 h1{
 	font-size:32px;
 	font:black;
+}
+
+.imagegallery{
+	margin: 0px 40px;
 	
 }
